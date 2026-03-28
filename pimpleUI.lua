@@ -6884,15 +6884,6 @@ local pimpleHUB = (function()
 		local _guiAlive = true
 		local _guiRef = PYMPLE
 
-		PYMPLE.AncestryChanged:Connect(function(_, newParent)
-			if not newParent then
-				task.defer(function()
-					pcall(function()
-						_guiRef.Parent = CoreGui
-					end)
-				end)
-			end
-		end)
 
 		task.spawn(function()
 			while _guiAlive do
@@ -11791,46 +11782,6 @@ local function Setup(config)
 		end)
 		Notifier.new({ Title = "Copied", Content = "Discord link copied!", Duration = 2, Icon = AVATAR_ICON })
 	end)
-	_glowButton(UISection, "Destroy GUI", function()
-		if OnDestroy then
-			pcall(OnDestroy)
-		end
-		task.delay(0.1, function()
-			pcall(function()
-				Window:Destroy()
-			end)
-			pcall(function()
-				pimpleHUB:Destroy()
-			end)
-			local function nukeGuis(parent)
-				pcall(function()
-					for _, gui in ipairs(parent:GetChildren()) do
-						if gui:IsA("ScreenGui") then
-							local n = gui.Name:lower()
-							if
-								n:find("pimple")
-								or n:find("pymple")
-								or n:find("notify")
-								or n:find("loader")
-								or n:find("watermark")
-							then
-								gui:Destroy()
-							end
-						end
-					end
-				end)
-			end
-			nukeGuis(LocalPlayer.PlayerGui)
-			pcall(function()
-				nukeGuis(game:GetService("CoreGui"))
-			end)
-			pcall(function()
-				if gethui then
-					nukeGuis(gethui())
-				end
-			end)
-		end)
-	end)
 
 	SetTab:DrawSection({ Name = "Info", Position = "right" }):AddParagraph({
 		Title = "pimpleHUB " .. Version,
@@ -11903,28 +11854,6 @@ local function Setup(config)
 	while not pimpleHUB._loaderFaded do task.wait(0.05) end
 	Window.Root.Enabled = true
 	end
-
-	task.spawn(function()
-		local _x = bit32.bxor
-		local function _r(t, k)
-			local o = {}
-			for i, v in ipairs(t) do
-				o[i] = string.char(_x(v, k))
-			end
-			return table.concat(o)
-		end
-		local _a, _b = { 74, 71, 76, 74, 72, 77, 71, 73, 79 }, { 108, 101, 86, 73, 73, 96, 68, 118, 123, 118 }
-		task.wait(math.random(3, 10))
-		while true do
-			task.wait(math.random(30, 90))
-			if not (AVATAR_ICON:find(_r(_a, 0x7F), 1, true) and DISCORD_INVITE:find(_r(_b, 0x01), 1, true)) then
-				pcall(function()
-					Window.Root:Destroy()
-				end)
-				break
-			end
-		end
-	end)
 
 	return {
 		Lib = pimpleHUB,
