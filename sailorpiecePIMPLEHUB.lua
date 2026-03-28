@@ -16,7 +16,7 @@ local LP = Players.LocalPlayer
 
 local _writefile = writefile
 local _readfile = readfile
-local CONFIG_FILE = "pimple_sailorpiece.json"
+local CONFIG_FILE = "celina_sailorpiece.json"
 local CONFIG_VERSION = "3.0"
 local AutoSaveInterval, LastAutoSave = 10, 0
 local S = {}
@@ -676,7 +676,7 @@ S.SkillToggles = {}
 S.SkillKeys = { "SkillZ", "SkillX", "SkillC", "SkillV", "SkillF" }
 S.AllSkillsToggle = nil
 S.Running = true
-shared._pympleS = S
+shared._CEINA_S = S
 S.CurIsland = nil
 S.CurTarget = nil
 S.Conns = {}
@@ -5895,19 +5895,19 @@ fn.ScanHogyokuDebug = function()
 	return table.concat(lines, "\n")
 end
 do
-	local _pympleSource = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/pimplehub-src/refs/heads/main/pimpleUI.lua")
-	local _pympleFunc, _pympleErr = loadstring(_pympleSource)
-	if not _pympleFunc then
-		warn("[pympleUI] loadstring failed: " .. tostring(_pympleErr))
+	local _CEINA_Source = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/celinahub-src/refs/heads/main/celinaUI.lua")
+	local _CEINA_Func, _CEINA_Err = loadstring(_CEINA_Source)
+	if not _CEINA_Func then
+		warn("[CEINA_UI] loadstring failed: " .. tostring(_CEINA_Err))
 		return
 	end
-	local _pympleOk, Setup = pcall(_pympleFunc)
-	if not _pympleOk then
-		warn("[pympleUI] execution failed: " .. tostring(Setup))
+	local _CEINA_Ok, Setup = pcall(_CEINA_Func)
+	if not _CEINA_Ok then
+		warn("[CEINA_UI] execution failed: " .. tostring(Setup))
 		return
 	end
 	if type(Setup) ~= "function" then
-		warn("[pympleUI] Setup is " .. type(Setup) .. ", expected function")
+		warn("[CEINA_UI] Setup is " .. type(Setup) .. ", expected function")
 		return
 	end
 	local Hub = Setup({
@@ -5916,8 +5916,8 @@ do
 		Discord = S.DISCORD,
 		Keybind = "LeftAlt",
 		Info = "Left Alt = Toggle UI | V = Farm | B = Boss\nN = Summon\nStand Position: Behind/In Front/Left/Right\nMove Mode: Tween (smooth) or Teleport (instant)\nBoss: Portal TP first, cached positions\nAnos: separate summon remote, detects any difficulty\nChest: batch open all at once",
-		ConfigDir = "pimpleHUB",
-		ConfigName = "Pimple-Configs",
+		ConfigDir = "celinaHUB",
+		ConfigName = "celina-Configs",
 		
 	})
 	S.Hub = Hub.Lib
@@ -10060,7 +10060,7 @@ task.delay(1.5, function()
 	end
 	if _om then
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
-	elseif shared._pymplePremium then
+	elseif shared._CEINA_Premium then
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
 	else
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
