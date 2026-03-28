@@ -5918,45 +5918,7 @@ do
 		Info = "Left Alt = Toggle UI | V = Farm | B = Boss\nN = Summon\nStand Position: Behind/In Front/Left/Right\nMove Mode: Tween (smooth) or Teleport (instant)\nBoss: Portal TP first, cached positions\nAnos: separate summon remote, detects any difficulty\nChest: batch open all at once",
 		ConfigDir = "pimpleHUB",
 		ConfigName = "Pimple-Configs",
-		OnDestroy = function()
-			S.Running = false
-			F.AutoFarmLevel = false
-			F.AutoDungeon = false
-			F.AutoBossRush = false
-			F.AutoInfiniteTower = false
-			F.BossEnabled = false
-			F.AutoChest = false
-			F.AutoMerchant = false
-			F.DungeonQuest = false
-			F.HogyokuQuest = false
-			for _, k in ipairs(S.SkillKeys) do
-				F[k] = false
-			end
-			pcall(function()
-				local c = LP.Character
-				if c then
-					local hm = c:FindFirstChildOfClass("Humanoid")
-					if hm then
-						hm.PlatformStand = false
-					end
-					for _, p in ipairs(c:GetDescendants()) do
-						if p:IsA("BasePart") then
-							p.CanCollide = true
-						end
-					end
-				end
-			end)
-			pcall(fn.StopTw)
-			pcall(fn.ClearTgt)
-			S.HoverPos = nil
-			pcall(fn.DisableAllAutoSpawn)
-			for _, c in ipairs(S.Conns) do
-				pcall(function()
-					c:Disconnect()
-				end)
-			end
-			S.Conns = {}
-		end,
+		
 	})
 	S.Hub = Hub.Lib
 	S.Win = Hub.Window
