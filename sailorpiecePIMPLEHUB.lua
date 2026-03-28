@@ -5895,7 +5895,7 @@ fn.ScanHogyokuDebug = function()
 	return table.concat(lines, "\n")
 end
 do
-	local _pympleSource = game:HttpGet("https://raw.githubusercontent.com/starlightofmoons5-ctrl/pimplehub-src/refs/heads/main/pimpleUI.lua")
+	local _pympleSource = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/pimplehub-src/refs/heads/main/pimpleUI.lua")
 	local _pympleFunc, _pympleErr = loadstring(_pympleSource)
 	if not _pympleFunc then
 		warn("[pympleUI] loadstring failed: " .. tostring(_pympleErr))
