@@ -5895,7 +5895,7 @@ fn.ScanHogyokuDebug = function()
 	return table.concat(lines, "\n")
 end
 do
-	local _CEINA_Source = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/celinahub-src/refs/heads/main/celinaUI.lua")
+	local _CEINA_Source = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/pimplehub-src/refs/heads/main/pimpleUI.lua")
 	local _CEINA_Func, _CEINA_Err = loadstring(_CEINA_Source)
 	if not _CEINA_Func then
 		warn("[CEINA_UI] loadstring failed: " .. tostring(_CEINA_Err))
