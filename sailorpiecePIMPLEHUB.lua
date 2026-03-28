@@ -416,7 +416,7 @@ local function LoadConfig()
 	end
 	return true
 end
-S.ICON = "rbxthumb://type=AvatarHeadShot&id=583572860&w=420&h=420"
+S.ICON = "https://i.ibb.co/bjLdp5Yq/avatar-1200x1200.jpg"
 S.DISCORD = "https://discord.gg/vsEjjqvpK5"
 S.NPC_FOLDER = "NPCs"
 S.BOSS_ISLAND_PORTAL = "Boss"
@@ -676,7 +676,7 @@ S.SkillToggles = {}
 S.SkillKeys = { "SkillZ", "SkillX", "SkillC", "SkillV", "SkillF" }
 S.AllSkillsToggle = nil
 S.Running = true
-shared._CELINA_S = S
+shared._CEINA_S = S
 S.CurIsland = nil
 S.CurTarget = nil
 S.Conns = {}
@@ -5895,19 +5895,19 @@ fn.ScanHogyokuDebug = function()
 	return table.concat(lines, "\n")
 end
 do
-	local _CELINA_Source = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/pimplehub-src/refs/heads/main/pimpleUI.lua")
-	local _CELINA_Func, _CELINA_Err = loadstring(_CELINA_Source)
-	if not _CELINA_Func then
-		warn("[CELINA_UI] loadstring failed: " .. tostring(_CELINA_Err))
+	local _CEINA_Source = game:HttpGet("https://raw.githubusercontent.com/youcantescapetheleaking/pimplehub-src/refs/heads/main/pimpleUI.lua")
+	local _CEINA_Func, _CEINA_Err = loadstring(_CEINA_Source)
+	if not _CEINA_Func then
+		warn("[CEINA_UI] loadstring failed: " .. tostring(_CEINA_Err))
 		return
 	end
-	local _CELINA_Ok, Setup = pcall(_CELINA_Func)
-	if not _CELINA_Ok then
-		warn("[CELINA_UI] execution failed: " .. tostring(Setup))
+	local _CEINA_Ok, Setup = pcall(_CEINA_Func)
+	if not _CEINA_Ok then
+		warn("[CEINA_UI] execution failed: " .. tostring(Setup))
 		return
 	end
 	if type(Setup) ~= "function" then
-		warn("[CELINA_UI] Setup is " .. type(Setup) .. ", expected function")
+		warn("[CEINA_UI] Setup is " .. type(Setup) .. ", expected function")
 		return
 	end
     local Hub = Setup({
@@ -10125,7 +10125,7 @@ task.delay(1.5, function()
 	end
 	if _om then
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
-	elseif shared._CELINA_Premium then
+	elseif shared._CEINA_Premium then
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
 	else
 		label = '<stroke color="rgb(204, 34, 34)" thickness="1"><font color="rgb(153, 17, 17)">OWNER</font></stroke>'
