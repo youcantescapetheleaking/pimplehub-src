@@ -5910,16 +5910,81 @@ do
 		warn("[CEINA_UI] Setup is " .. type(Setup) .. ", expected function")
 		return
 	end
-	local Hub = Setup({
+    local Hub = Setup({
 		Version = "3.0",
 		Icon = S.ICON,
 		Discord = S.DISCORD,
 		Keybind = "LeftAlt",
 		Info = "Left Alt = Toggle UI | V = Farm | B = Boss\nN = Summon\nStand Position: Behind/In Front/Left/Right\nMove Mode: Tween (smooth) or Teleport (instant)\nBoss: Portal TP first, cached positions\nAnos: separate summon remote, detects any difficulty\nChest: batch open all at once",
-		ConfigDir = "celinaHUB",
-		ConfigName = "celina-Configs",
-		
+		ConfigDir = "pimpleHUB",
+		ConfigName = "Pimple-Configs",
+		OnDestroy = function()
+			S.Running = false
+			F.AutoFarmLevel = false
+			F.AutoDungeon = false
+			F.AutoBossRush = false
+			F.AutoInfiniteTower = false
+			F.BossEnabled = false
+			F.AutoChest = false
+			F.AutoMerchant = false
+			F.DungeonQuest = false
+			F.HogyokuQuest = false
+			for _, k in ipairs(S.SkillKeys) do
+				F[k] = false
+			end
+			pcall(function()
+				local c = LP.Character
+				if c then
+					local hm = c:FindFirstChildOfClass("Humanoid")
+					if hm then
+						hm.PlatformStand = false
+					end
+					for _, p in ipairs(c:GetDescendants()) do
+						if p:IsA("BasePart") then
+							p.CanCollide = true
+						end
+					end
+				end
+			end)
+			pcall(fn.StopTw)
+			pcall(fn.ClearTgt)
+			S.HoverPos = nil
+			pcall(fn.DisableAllAutoSpawn)
+			for _, c in ipairs(S.Conns) do
+				pcall(function()
+					c:Disconnect()
+				end)
+			end
+			S.Conns = {}
+		end,
 	})
+	S.Hub = Hub.Lib
+	S.Win = Hub.Window
+	S.Notify = Hub.Notify
+	S.CfgMgr = Hub.ConfigManager
+	local _glowButton = Hub.GlowButton
+	LoadConfig()
+	if F.Optimize then
+		task.spawn(function()
+			pcall(function()
+				local r = fn.WalkPathWait(RS, 3, unpack(R.Settings))
+				if not r then
+					return
+				end
+				for _, s in ipairs({
+					"DisableVFX",
+					"DisableCutscene",
+					"DisableOtherVFX",
+					"DisableScreenShake",
+					"RemoveTexture",
+					"RemoveShadows",
+				}) do
+					r:FireServer(s, true)
+					task.wait(0.05)
+				end
+			end)
+		end)
+	end
 	S.Hub = Hub.Lib
 	S.Win = Hub.Window
 	S.Notify = Hub.Notify
