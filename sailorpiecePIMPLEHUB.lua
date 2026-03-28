@@ -9986,6 +9986,17 @@ do
 		end
 		S.Notify.new({ Title = "Codes", Content = "Attempted " .. count .. " codes", Duration = 3, Icon = S.ICON })
 	end)
+    _glowButton(UISection, "Destroy UI", function()
+        pcall(function()
+            if OnDestroy then
+                OnDestroy()
+            end
+        end)
+
+        pcall(function()
+            Window:Destroy()
+        end)
+    end)
 	Hub.BuildSettings()
 	fn.Conn(UserInputService.InputBegan:Connect(function(input, gp)
 		if gp or fn.Typing() then
